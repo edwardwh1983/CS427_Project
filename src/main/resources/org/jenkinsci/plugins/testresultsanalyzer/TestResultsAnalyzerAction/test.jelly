@@ -1,0 +1,185 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+<l:layout title="Test Result Graph">
+<st:include it="${it.project}" page="sidepanel.jelly" />
+<st:bind var="remoteAction" value="${it}"/> 
+<l:main-panel>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/jquery/js/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/handlebars-v2.0.0.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/highcharts.js"></script>
+
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/testresult.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/chart-generator.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/test-result-analyzer-template.js"></script>
+
+<style>
+ table {
+  padding:5px;
+ }
+
+ h3 {
+  bottom-border:1px solid black;
+ }
+
+ .right-align{
+  text-align:right;
+ }
+  
+ .left-align{
+   text-align:left;
+ }
+ .extra-padding{
+   padding-right:10px;
+ }
+
+ .deep-table tr td {
+   width:150px;
+   overflow-scroll;
+ }
+
+ .test-block{
+   padding:5px;
+   border:1px solid black;
+   border-radius:10px;
+   margin-top:10px;
+ }
+
+ .test-block table tr{
+   border-bottom:1px solid black;
+ }
+  
+ .test-block td,
+ .test-block th{
+   padding-left:10px;
+ }
+
+ .test-block th{
+  text-align:left;
+ }
+  
+ .test-block table tr:hover{
+   background-color:#f8f8f8;
+ }
+  
+ .test-block h1,
+ .test-block h2,
+ .test-block h3{
+   width:100%;
+   display:inline-block;
+   background-color:#f8f8f8;
+   margin-top:0px;
+   padding:20px;
+   border-radius:5px;
+ }
+
+ .table-contents{
+   margin-top:15px;
+   padding:10px;
+   border:1px solid black;
+   border-radius:5px;
+ }
+
+ .table-contents li {
+   list-style-type:none;
+ }
+
+ .numeric-table{
+   width:100%;
+ }
+
+ .numeric-table th,
+ .numeric-table td{
+   width:50%;
+ }
+
+ .individualTest{
+  display:inline-block;
+  width:40%;
+  height:100px;
+  border:1px solid black
+ }
+
+ .filterArea ul {
+   display:inline-block;
+  }
+
+ .filterArea ul li {
+   display:inline-block;
+   padding-left:10px;
+   list-style-type:none;
+  }
+ 
+</style>
+
+<script>
+
+var $j = jQuery.noConflict();
+</script>
+<script data-main="${resURL}/plugin/test-results-analyzer/js/test-main.js" src="${resURL}/plugin/test-results-analyzer/lib/require.js"></script>
+<j:set var="temp" value="${it.jsonLoadData}"/>
+<j:set var="builds" value="${it.builds}"/>
+
+
+
+<div id='content'>
+ <h1>Test Results Differences</h1>
+ <p>
+  This page is meant to showcase the difference between the test results of the selected builds. Data of the tests is pulled from the Jenkins API and all information gathered is through the use of that API. Navigate through the sections of the page using the table of contents below.
+ </p>
+
+ <div class='table-contents'>
+  <h4>Table of Contents: </h4>
+  <ul id='table-of-contents'>
+   <li><a href='#'>Test Results</a></li>
+   <li><a href='#'>Individual Test Difference</a></li>
+   <li><a href='#'>Test Summarization</a></li>
+   <li><a href='#'>Automatically Generated Tests</a></li>
+   <li><a href='#'>Shallow Summarization</a></li>
+   <li><a href='#'>Deep Summarization</a></li>
+  </ul>
+ </div>
+
+ <div class='test-block' id='testResults'>
+  <h2>Test Results</h2>
+  <div id='buildA'>
+  </div>
+
+  <div id='buildB'>
+  </div>
+ </div>
+
+ <div class='test-block' id='individualTest'>
+  <h2>Individual Test Comparison</h2>
+  <div id='test1' class='individual-test'></div>
+  <div id='test2' class='individual-test'></div>
+ </div>
+
+ <div class='test-block' id='testSummarization'>
+  <h2>Test Summarization</h2>
+ </div>
+ 
+ <div class='test-block' id='automaticTests'>
+  <h2>Automatically Generated Tests</h2>
+  <div id='autoBuildA'></div>
+  <div id='autoBuildB'></div>
+ </div>
+
+ <div class='test-block' id='shallowSummarization'>
+  <h2>Shallow Summarization</h2>
+ </div>
+ 
+ <div class='test-block' id='deepSummarization'>
+  <h2>Deep Summarization</h2>
+  <div class='filterArea' id='filterArea'>
+  </div>
+  <div id='deepSummaryArea'></div>
+ </div>
+
+</div>
+
+
+</l:main-panel>
+
+ </l:layout>
+</j:jelly>

@@ -1,0 +1,52 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+<l:layout title="Test Result Graph">
+<st:include it="${it.project}" page="sidepanel.jelly" />
+<st:bind var="remoteAction" value="${it}"/>
+<l:main-panel>
+
+<link href="${resURL}/plugin/test-results-analyzer/css/table-style.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/jquery/js/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/handlebars-v2.0.0.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/highcharts.js"></script>
+
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/testresult.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/chart-generator.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/test-result-analyzer-template.js"></script>
+
+<script>
+	var $j = jQuery.noConflict();
+</script>
+
+<script data-main="${resURL}/plugin/test-results-analyzer/js/main.js" src="${resURL}/plugin/test-results-analyzer/lib/require.js"></script>
+
+<j:set var="temp" value="${it.jsonLoadData}"/>
+<j:set var="builds" value="${it.builds}"/>
+
+<div class="alphaHome" style='padding:5px;'>
+	<div id="alphaHeader">
+		<h1>Comparing
+			<b>builds <span class='cov_build1 build'></span></b>
+			and
+			<b><span class='cov_build2 build'></span></b>
+		</h1>
+	</div>
+
+	<div class="innerTitle">Test Coverage Changes</div>
+	<div class="innerDiv" id="coverageContent"></div>
+
+	<div class="innerTitle">File Changes</div>
+	<div class="innerDiv" id="fileContent">
+		<ul id='alpha_file_changes' style="list-style-type:none"></ul>
+	</div>
+
+	<div class="innerTitle">Test Changes</div>
+	<div class="innerDiv" id='testContent'></div>
+</div>
+
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/homeScript.js"></script>
+</l:main-panel>
+
+ </l:layout>
+</j:jelly>

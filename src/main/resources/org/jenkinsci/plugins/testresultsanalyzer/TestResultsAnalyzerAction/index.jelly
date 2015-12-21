@@ -1,0 +1,41 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+<l:layout title="Test Result Graph">
+<st:include it="${it.project}" page="sidepanel.jelly" />
+<st:bind var="remoteAction" value="${it}"/> 
+<l:main-panel>
+<link href="${resURL}/plugin/test-results-analyzer/css/table-style.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/jquery/js/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/handlebars-v2.0.0.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/highcharts.js"></script>
+
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/testresult.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/chart-generator.js"></script>
+<script type="text/javascript" src="${resURL}/plugin/test-results-analyzer/js/test-result-analyzer-template.js"></script>
+<script>
+
+var $j = jQuery.noConflict();
+</script>
+<script data-main="${resURL}/plugin/test-results-analyzer/js/main.js" src="${resURL}/plugin/test-results-analyzer/lib/require.js"></script>
+<j:set var="temp" value="${it.jsonLoadData}"/>
+<j:set var="builds" value="${it.builds}"/>
+
+<div style='padding:20px; text-align:center'>
+    <h1>Hello! Welcome to the Team Alpha Diff Plugin</h1>
+    <p>Here you will find a complete comprehensive changelog in the differences of your project as you continue to build it.</p>
+    <p>You can start by selecting the 2 builds you want to compare below:</p>
+    <p><b>Show from build (Optional)</b>: <select id='show'/></p>
+    <p><button id='start'>Start from specified build</button></p>
+    <p><b>Build 1</b>: <select id='build1'/></p>
+    <p><b>Build 2</b>: <select id='build2'/></p>
+    <p><button id="selectBuild">Compare</button></p>
+</div>
+
+
+
+
+</l:main-panel>
+
+ </l:layout>
+</j:jelly>
