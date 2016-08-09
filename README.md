@@ -1,5 +1,5 @@
 Build Difference Analyzer
-=====================
+=========================
 
 This is a Jenkins plugin to display the difference between two builds.
 
