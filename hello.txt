@@ -1,7 +1,6 @@
 hello
 world
-Hao
-Shawn
 Chengjun Zhou
-Shawn 
 Sophie Zhou
+Hao Wang
+Shawn Wang
