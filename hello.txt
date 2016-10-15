@@ -2,6 +2,6 @@ hello
 world
 Hao
 Shawn
-Chengjun
+Chengjun Zhou
 Shawn 
-Sophie
+Sophie Zhou
